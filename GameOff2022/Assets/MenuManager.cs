@@ -21,18 +21,11 @@ public class MenuManager : MonoBehaviour
     {
         menuArray[1].SetActive(true);
         menuArray[0].SetActive(false);
-        menuArray[2].SetActive(false);
-    }
-
-    public void LevelSelect()
-    {
-        menuArray[2].SetActive(true);
-        menuArray[1].SetActive(false);
     }
 
     public void GoToRobots()
     {
-        menuArray[3].SetActive(true);
+        menuArray[2].SetActive(true);
         menuArray[0].SetActive(false);
     }
 
@@ -72,7 +65,7 @@ public class MenuManager : MonoBehaviour
     {
         menuArray[0].SetActive(true);
         menuArray[1].SetActive(false);
-        menuArray[3].SetActive(false);
+        menuArray[2].SetActive(false);
     }
 
     public void QuitGame()
