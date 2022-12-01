@@ -5,13 +5,20 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
 
-    public GameObject pausePanel;
+    public GameObject pausePanel, pauseButton;
 
     public bool isPaused;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { PauseGame(); }
+        if (!isPaused)
+        {
+            if (Input.GetKeyDown(KeyCode.P)) { PauseGame(); }
+        }
+        if (isPaused) 
+        { 
+            if (Input.GetKeyDown(KeyCode.P)) { ResumeGame(); } 
+        }
     }
 
     public void PauseGame()
@@ -19,16 +26,14 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0;
         pausePanel.SetActive(true);
         isPaused = true;
-        if (isPaused)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape)) { Resume(); }
-        }
+        pauseButton.SetActive(false);
     }
 
-    public void Resume()
+    public void ResumeGame()
     {
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         isPaused = false;
+        pauseButton.SetActive(true);
     }
 }

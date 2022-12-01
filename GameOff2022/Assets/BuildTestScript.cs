@@ -16,6 +16,9 @@ public class BuildTestScript : MonoBehaviour
     public Sprite[] fArray;
     public GameObject armObject, legObject, buildUI;
 
+    public GameObject successTextObj, failTextobj;
+    public TMPro.TextMeshProUGUI successText, failText;
+
 
     // request UI
     public Image aRImage, lRImage, rImage;
@@ -38,7 +41,8 @@ public class BuildTestScript : MonoBehaviour
 
     // pause
     public bool isPaused;
-    public GameObject pausePanel;
+    public GameObject pausePanel, pauseButton;
+    
 
     int randNum;
     int sInt, eInt, hInt;
@@ -85,6 +89,7 @@ public class BuildTestScript : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         SetInitialArmImage();
         SetInitialLegImage();
         buildUI.SetActive(false);
@@ -130,15 +135,15 @@ public class BuildTestScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { 
-            //PauseGame();
+        //if(!isPaused) { if (Input.GetKeyDown(KeyCode.P)) { PauseGame(); } }
+        //if (isPaused) { if (Input.GetKeyDown(KeyCode.P)) { ResumeGame(); } }
 
-            isPaused = !isPaused;
-            Time.timeScale = isPaused ? 0 : 1;
-            pausePanel.SetActive(isPaused);
-
-        }
-        if (isPaused) { if (Input.GetKeyDown(KeyCode.Escape)) { ResumeGame(); } }
+        if (Input.GetKeyDown(KeyCode.Keypad9)) { ShoulderRightButtonClick(); }
+        if (Input.GetKeyDown(KeyCode.Keypad6)) { ElbowRightButtonClick(); }
+        if (Input.GetKeyDown(KeyCode.Keypad3)) { HandRightButtonClick(); }
+        if (Input.GetKeyDown(KeyCode.Keypad8)) { HipRightButtonClick(); }
+        if (Input.GetKeyDown(KeyCode.Keypad5)) { KneeRightButtonClick(); }
+        if (Input.GetKeyDown(KeyCode.Keypad2)) { FootRightButtonClick(); }
 
         if(timeValue> 0)
         {
@@ -150,7 +155,6 @@ public class BuildTestScript : MonoBehaviour
         }
 
         Timer(timeValue);
-
 
     }
 
@@ -250,24 +254,12 @@ public class BuildTestScript : MonoBehaviour
     {
         sInt++;
 
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
+
         if ((sInt) >= sArray.Length)
         {
             sInt = 0;
-            sImage.sprite = sArray[shoulderList[sInt]];
-        }
-
-        sImage.sprite = sArray[shoulderList[sInt]];
-
-    }
-    public void ShoulderLeftButtonClick()
-    {
-
-        sInt--;
-
-        
-        if ((sInt) < 0)
-        {
-            sInt = sArray.Length - 1;
             sImage.sprite = sArray[shoulderList[sInt]];
         }
 
@@ -278,22 +270,12 @@ public class BuildTestScript : MonoBehaviour
     {
         eInt++;
 
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
+
         if ((eInt) >= eArray.Length)
         {
             eInt = 0;
-            eImage.sprite = eArray[elbowList[eInt]];
-        }
-
-        eImage.sprite = eArray[elbowList[eInt]];
-
-    }
-    public void ElbowLeftButtonClick()
-    {
-        eInt--;
-
-        if ((eInt) < 0)
-        {
-            eInt = eArray.Length - 1;
             eImage.sprite = eArray[elbowList[eInt]];
         }
 
@@ -304,6 +286,9 @@ public class BuildTestScript : MonoBehaviour
     {
         hInt++;
 
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
+
         if ((hInt) >= hArray.Length)
         {
             hInt = 0;
@@ -313,26 +298,15 @@ public class BuildTestScript : MonoBehaviour
         hImage.sprite = hArray[handList[hInt]];
 
     }
-    public void HandLeftButtonClick()
-    {
-        hInt--;
-
-        if ((hInt) < 0)
-        {
-            hInt = hArray.Length - 1;
-            hImage.sprite = hArray[handList[hInt]];
-        }
-
-        hImage.sprite = hArray[handList[hInt]];
-
-    }
-
 
 
     // Leg Arrow Buttons
     public void HipRightButtonClick()
     {
         hiInt++;
+
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
 
         if ((hiInt) >= sArray.Length)
         {
@@ -343,24 +317,12 @@ public class BuildTestScript : MonoBehaviour
         hiImage.sprite = hiArray[hipList[hiInt]];
 
     } 
-    public void HipLeftButtonClick()
-    {
-
-        hiInt--;
-
-        
-        if ((hiInt) < 0)
-        {
-            hiInt = hiArray.Length - 1;
-            hiImage.sprite = hiArray[hipList[hiInt]];
-        }
-
-        hiImage.sprite = hiArray[shoulderList[hiInt]];
-
-    }
     public void KneeRightButtonClick()
     {
         kInt++;
+
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
 
         if ((kInt) >= kArray.Length)
         {
@@ -371,22 +333,12 @@ public class BuildTestScript : MonoBehaviour
         kImage.sprite = kArray[kneeList[kInt]];
 
     }
-    public void KneeLeftButtonClick()
-    {
-        kInt--;
-
-        if ((kInt) < 0)
-        {
-            kInt = kArray.Length - 1;
-            kImage.sprite = kArray[kneeList[kInt]];
-        }
-
-        kImage.sprite = kArray[kneeList[kInt]];
-
-    }
     public void FootRightButtonClick()
     {
         fInt++;
+
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
 
         if ((fInt) >= fArray.Length)
         {
@@ -397,33 +349,24 @@ public class BuildTestScript : MonoBehaviour
         fImage.sprite = fArray[footList[fInt]];
 
     }
-    public void FootLeftButtonClick()
-    {
-        fInt--;
 
-        if ((fInt) < 0)
-        {
-            fInt = fArray.Length - 1;
-            fImage.sprite = fArray[footList[fInt]];
-        }
-
-        fImage.sprite = fArray[footList[fInt]];
-
-    }
     
-
-
 
 
     public void CheckArmBuildAccuracy()
     {
         Debug.Log("Shoulder: " + shoulderList[sInt] + " || Elbow: " + elbowList[eInt] + " || Hand: " + handList[hInt] + " ||");
 
-        if(shoulderList[sInt] == elbowList[eInt] || shoulderList[sInt] == handList[hInt] || elbowList[eInt] == handList[hInt])
+        if(shoulderList[sInt] == elbowList[eInt] && shoulderList[sInt] == handList[hInt] && elbowList[eInt] == handList[hInt])
         {
-            Debug.Log("Arm Build Success");
+            //Debug.Log("Arm Build Success");
+
+            
+
             if( shoulderList[sInt] == armInt)
             {
+                successTextObj.SetActive(true);
+                successText.text = "Arm Build Successful";
                 armCheck.SetActive(true);
                 armRequestMet = true;
                 armObject.SetActive(false);
@@ -432,34 +375,59 @@ public class BuildTestScript : MonoBehaviour
             }
 
         }
-        else { Debug.Log("Arm Build Fail"); }
+        else 
+        {
+            //Debug.Log("Arm Build Fail"); 
+
+            failTextobj.SetActive(true);
+            failText.text = "Arm Build Failed";
+
+        }
     }
 
     public void CheckLegBuildAccuracy()
     {
         Debug.Log("Hip: " + hipList[hiInt] + " || Knee: " + kneeList[kInt] + " || Foot: " + footList[fInt] + " ||");
 
-        if (hipList[hiInt] == kneeList[kInt] || hipList[hiInt] == footList[fInt] || kneeList[kInt] == footList[fInt])
+        successTextObj.SetActive(false);
+        failTextobj.SetActive(false);
+
+        if (hipList[hiInt] == kneeList[kInt] && hipList[hiInt] == footList[fInt] && kneeList[kInt] == footList[fInt])
         {
-            Debug.Log("Leg Build Success");
+            //Debug.Log("Leg Build Success");
+
+            
+
             if (hipList[hiInt] == legInt)
             {
+                successTextObj.SetActive(true);
+                successText.text = "Leg Build Successful";
                 legCheck.SetActive(true);
                 legRequestMet = true;
                 legObject.SetActive(false);
                 armObject.SetActive(true);
                 SetInitialLegImage();
 
+                //UncoverBlocker();
+
                 if (legRequestMet) { buildUI.SetActive(false); }
             }
         }
-        else { Debug.Log("Leg Build Fail"); }
+        else 
+        {
+            //Debug.Log("Leg Build Fail"); 
+            failTextobj.SetActive(true);
+            failText.text = "Leg Build Failed";
+        }
     }
 
     public void UncoverBlocker()
     {
         if(armRequestMet && legRequestMet)
         {
+            successTextObj.SetActive(false);
+            failTextobj.SetActive(false);
+
             blockers[rewardInt].SetActive(false);
             buildUI.SetActive(false);
 
@@ -492,6 +460,7 @@ public class BuildTestScript : MonoBehaviour
         Time.timeScale = 0;
         pausePanel.SetActive(true);
         isPaused = true;
+        pauseButton.SetActive(false);
     }
 
     public void ResumeGame()
@@ -499,6 +468,7 @@ public class BuildTestScript : MonoBehaviour
         Time.timeScale = 1;
         pausePanel.SetActive(false);
         isPaused = false;
+        pauseButton.SetActive(true);
     }
 
     public void Win()

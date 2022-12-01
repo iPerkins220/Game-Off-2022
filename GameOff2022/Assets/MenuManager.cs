@@ -68,6 +68,11 @@ public class MenuManager : MonoBehaviour
         menuArray[2].SetActive(false);
     }
 
+    public void PlayTheGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
