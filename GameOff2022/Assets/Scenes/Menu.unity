@@ -3592,14 +3592,14 @@ MonoBehaviour:
     to get the parts you need to assemble a whole robot.
 
 
-    Requests will come
-    in on your phone, build the arm and leg correctly and get the part in return.
-    After completing the assembly of the whole robot the level will end.
+    Each day requests
+    will come in on your phone, build the arm and leg correctly and get the part
+    in return. After completing the assembly of the whole robot the day will end.
 
 
     The
-    first level will auto build the arms and legs. After you will need to build the
-    arms and legs.
+    first day will auto build the arms and legs. In following days you will need
+    to build the arms and legs to complete the robot.
 
 '
   m_isRightToLeft: 0
